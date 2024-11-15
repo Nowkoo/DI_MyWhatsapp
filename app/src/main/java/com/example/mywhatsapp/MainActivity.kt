@@ -5,20 +5,27 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.SecondaryIndicator
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -53,7 +60,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier
                         .fillMaxSize()
                         .nestedScroll(scrollBehaviour.nestedScrollConnection),
-                    topBar = { CreateTopAppBar(scrollBehaviour) }
+                    topBar = { CreateTopAppBar(scrollBehaviour) },
+                    floatingActionButton = { CreateFAB() }
                 ) { innerPadding ->
                     val tabs = listOf("Chats", "Novedades", "Llamadas")
                     var selectedTabIndex by remember { mutableStateOf(0) }
@@ -62,14 +70,21 @@ class MainActivity : ComponentActivity() {
                     Column (modifier.fillMaxSize()) {
                         TabRow(
                             selectedTabIndex = 0,
-                            contentColor = Color.White
+                            contentColor = Color.White,
+                            indicator = { tabPositions ->
+                                SecondaryIndicator(
+                                    Modifier
+                                        .tabIndicatorOffset(tabPositions[selectedTabIndex]),
+                                    color = Color.White
+                                )
+                            }
                         ) {
                             tabs.forEachIndexed { index, s ->
                                 Tab(
                                     selected = selectedTabIndex == index,
                                     onClick = { selectedTabIndex = index },
                                     text = { Text(s) },
-                                    modifier = Modifier.background(VerdeWhatsApp)
+                                    modifier = Modifier.background(VerdeWhatsApp),
                                 )
                             }
                         }
@@ -126,4 +141,16 @@ fun CreateTopAppBar(scrollBehaviour: TopAppBarScrollBehavior) {
         },
         scrollBehavior = scrollBehaviour
     )
+}
+
+@Composable
+fun CreateFAB() {
+    FloatingActionButton(
+        onClick = {},
+        elevation = FloatingActionButtonDefaults.elevation(0.dp),
+        containerColor = VerdeWhatsApp,
+        contentColor = Color.White
+    ) {
+        Icon(Icons.Filled.Add, "Nuevo chat")
+    }
 }

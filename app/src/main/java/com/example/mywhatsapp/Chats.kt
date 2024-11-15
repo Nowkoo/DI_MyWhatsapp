@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +25,8 @@ import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -60,12 +63,12 @@ fun ItemContacto(contacto: Contacto) {
             .fillMaxWidth()
         ,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(20.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Box(
             modifier = Modifier
-                .padding(8.dp)
-                .size(90.dp)
+                .padding(10.dp)
+                .size(70.dp)
         ) {
             Image(
                 painter = painterResource(contacto.foto),
@@ -76,10 +79,31 @@ fun ItemContacto(contacto: Contacto) {
                     .fillMaxSize()
             )
         }
-        Text(
-            text = contacto.nombre,
-            fontSize = 20.sp
-        )
+        Column {
+            Row {
+                Text(
+                    text = contacto.nombre,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.weight(1f)
+                )
+                Text(
+                    text = contacto.fechaUltimoMensaje,
+                    fontSize = 13.sp,
+                    color = Color.Gray,
+                    modifier = Modifier.padding(end = 10.dp)
+                )
+            }
+
+            Text(
+                text = "${contacto.nombre}: ${contacto.ultimoMensaje}",
+                fontSize = 15.sp,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.padding(end = 10.dp),
+                color = Color.Gray
+            )
+        }
     }
 }
 
@@ -88,42 +112,58 @@ fun getContactos(): List<Contacto> {
         Contacto(
             "María Mata",
             "Departamento de informática",
-            R.drawable.pj_image1
+            R.drawable.pj_image1,
+            "El viernes que viene hay mantenimiento",
+            "11:26 AM"
         ),
         Contacto(
             "Antonio Sanz",
             "Departamento de informática",
-            R.drawable.pj_image2
+            R.drawable.pj_image2,
+            "Sí",
+            "Ayer"
         ),
         Contacto(
             "Carlos Pérez",
             "Comunidad de propietarios",
-            R.drawable.pj_image3
+            R.drawable.pj_image3,
+            "Estimados vecinos, les recordamos que la próxima reunión se llevará a a cabo el martes que viene a las 18:00",
+            "8:15 AM"
         ),
         Contacto(
             "Beatriz Martos",
             "Comunidad de propietarios",
-            R.drawable.pj_image4
+            R.drawable.pj_image4,
+            "Lo siento, acabo de ver tu mensaje.",
+            "10:20 AM"
         ),
         Contacto(
             "Sandra Alegre",
             "Gimnasio",
-            R.drawable.pj_image5
+            R.drawable.pj_image5,
+            "¿Mañana vas a spinning?",
+            "11:50 AM"
         ),
         Contacto(
             "Alex Serrat",
             "Gimnasio",
-            R.drawable.pj_image6
+            R.drawable.pj_image6,
+            "Es festivo, no sé si abrirán",
+            "Ayer"
         ),
         Contacto(
             "Ana Peris",
             "Departamento de informática",
-            R.drawable.pj_image7
+            R.drawable.pj_image7,
+            "Nos vemos en la reunión",
+            "Ayer"
         ),
         Contacto(
             "Rodrigo Rodríguez",
             "Gimnasio",
-            R.drawable.pj_image8
+            R.drawable.pj_image8,
+            "Estoy agotado",
+            "Ayer"
         )
     )
 }
@@ -132,4 +172,6 @@ data class Contacto(
     var nombre: String,
     var grupo: String,
     @DrawableRes var foto: Int,
+    var ultimoMensaje: String,
+    var fechaUltimoMensaje: String
 )

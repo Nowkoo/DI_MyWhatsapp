@@ -57,7 +57,7 @@ fun MyWhatsappTheme(
     val window =
         (view.context as Activity).window
     window.statusBarColor = VerdeWhatsApp.toArgb()
-    WindowInsetsControllerCompat(window, view).isAppearanceLightStatusBars = true
+    WindowInsetsControllerCompat(window, view).isAppearanceLightStatusBars = false
 
     MaterialTheme(
         colorScheme = colorScheme,
