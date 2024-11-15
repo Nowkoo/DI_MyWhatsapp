@@ -6,8 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -22,6 +22,8 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,20 +32,28 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.mywhatsapp.ui.theme.MyWhatsappTheme
+import com.example.mywhatsapp.ui.theme.VerdeWhatsApp
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             MyWhatsappTheme {
+                val scrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+
                 Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    topBar = { CreateTopAppBar() }
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .nestedScroll(scrollBehaviour.nestedScrollConnection),
+                    topBar = { CreateTopAppBar(scrollBehaviour) }
                 ) { innerPadding ->
                     val tabs = listOf("Chats", "Novedades", "Llamadas")
                     var selectedTabIndex by remember { mutableStateOf(0) }
@@ -59,17 +69,16 @@ class MainActivity : ComponentActivity() {
                                     selected = selectedTabIndex == index,
                                     onClick = { selectedTabIndex = index },
                                     text = { Text(s) },
-                                    modifier = Modifier.background(Color(0xFF075E54))
+                                    modifier = Modifier.background(VerdeWhatsApp)
                                 )
                             }
                         }
-                    }
 
-                    val modifierConTabs = Modifier.padding(top = 130.dp)
-                    when (selectedTabIndex) {
-                        0 -> Chats(modifierConTabs)
-                        1 -> Novedades(modifierConTabs)
-                        2 -> Llamadas(modifierConTabs)
+                        when (selectedTabIndex) {
+                            0 -> Chats()
+                            1 -> Novedades()
+                            2 -> Llamadas()
+                        }
                     }
                 }
             }
@@ -77,20 +86,12 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CreateTopAppBar() {
+fun CreateTopAppBar(scrollBehaviour: TopAppBarScrollBehavior) {
     TopAppBar(
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = Color(0xFF075E54),
+            containerColor = VerdeWhatsApp,
             titleContentColor = Color.White,
             actionIconContentColor = Color.White
         ),
@@ -122,6 +123,7 @@ fun CreateTopAppBar() {
                     contentDescription = "Localized description"
                 )
             }
-        }
+        },
+        scrollBehavior = scrollBehaviour
     )
 }

@@ -8,8 +8,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun Llamadas(modifier: Modifier) {
-    Column(modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+fun Llamadas() {
+    Column() {
         Text("Llamadas")
     }
 }
