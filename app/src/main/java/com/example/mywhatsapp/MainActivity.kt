@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +12,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
@@ -35,6 +38,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,9 +50,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.mywhatsapp.ui.theme.MyWhatsappTheme
 import com.example.mywhatsapp.ui.theme.VerdeWhatsApp
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3Api::class)
+    @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -63,36 +68,45 @@ class MainActivity : ComponentActivity() {
                     topBar = { CreateTopAppBar(scrollBehaviour) },
                     floatingActionButton = { CreateFAB() }
                 ) { innerPadding ->
-                    val tabs = listOf("Chats", "Novedades", "Llamadas")
-                    var selectedTabIndex by remember { mutableStateOf(0) }
                     val modifier = Modifier.padding(innerPadding)
+                    val tabs = listOf("Chats", "Novedades", "Llamadas")
+                    val pagerState = rememberPagerState(initialPage = 0, pageCount = { tabs.size })
+                    val scope = rememberCoroutineScope()
 
                     Column (modifier.fillMaxSize()) {
                         TabRow(
-                            selectedTabIndex = 0,
+                            selectedTabIndex = pagerState.currentPage,
                             contentColor = Color.White,
                             indicator = { tabPositions ->
                                 SecondaryIndicator(
                                     Modifier
-                                        .tabIndicatorOffset(tabPositions[selectedTabIndex]),
+                                        .tabIndicatorOffset(tabPositions[pagerState.currentPage]),
                                     color = Color.White
                                 )
                             }
                         ) {
                             tabs.forEachIndexed { index, s ->
                                 Tab(
-                                    selected = selectedTabIndex == index,
-                                    onClick = { selectedTabIndex = index },
+                                    selected = pagerState.currentPage == index,
+                                    onClick = {
+                                        scope.launch {
+                                            pagerState.animateScrollToPage(page = index)
+                                        }},
                                     text = { Text(s) },
                                     modifier = Modifier.background(VerdeWhatsApp),
                                 )
                             }
                         }
 
-                        when (selectedTabIndex) {
-                            0 -> Chats()
-                            1 -> Novedades()
-                            2 -> Llamadas()
+                        HorizontalPager(
+                            state = pagerState,
+                            modifier = Modifier.fillMaxSize()
+                        ) { page ->
+                            when (page) {
+                                0 -> Chats()
+                                1 -> Novedades()
+                                2 -> Llamadas()
+                            }
                         }
                     }
                 }
