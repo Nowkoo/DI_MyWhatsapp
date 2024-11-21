@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="350dp"
+    android:height="350dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <path
+        android:name="cara"
+        android:fillColor="#ffd833 "
+        android:strokeLineCap="square"
+        android:strokeWidth="2"
+        android:pathData="@string/pathDataCara"/>
+    <path
+        android:name="ojoD"
+        android:fillColor="#000"
+        android:strokeLineCap="square"
+        android:strokeWidth="2"
+        android:pathData="@string/pathDataOjoDerecho"/>
+    <path
+        android:name="ojoI"
+        android:fillColor="#000"
+        android:strokeLineCap="square"
+        android:strokeWidth="2"
+        android:pathData="@string/pathDataOjoIzquierdo"/>
+    <path
+        android:name="boca"
+        android:strokeColor="#000"
+        android:strokeLineCap="square"
+        android:strokeWidth="2"
+        android:pathData="@string/pathDataBocaSonriente"/>
+</vector>

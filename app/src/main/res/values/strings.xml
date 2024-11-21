@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">MyWhatsapp</string>
+    <string name="pathDataCross">M6.4,6.4 L17.6,17.6 M6.4,17.6 L17.6,6.4</string>
+    <string name="pathDataTick">M4.8,13.4 L9,17.6 M10.4,16.2 L19.6,7</string>
+    <string name="pathDataPause1">M 6 5 L 6 19 L 10 19 L 10 5 Z</string>
+    <string name="pathDataPause2">M 14 19 L 18 19 L 18 5 L 14 5 Z</string>
+    <string name="pathDataPlay1">M 8 5.14 L 8 19.14 L 11.456 16.661 L 11.456 7.339 Z</string>
+    <string name="pathDataPlay2">M 11.245 16.795 L 19 12.14 L 19 12.14 L 11.245 7.205 Z</string>
+    <string name="pathDataCara">M 50,50 m -48,0 a 48,48 0 1,0 96,0 a 48,48 0 1,0 -96,0</string>
+    <string name="pathDataOjoIzquierdo">M 35,40 m -7,0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0</string>
+    <string name="pathDataOjoDerecho">M 65,40 m -7,0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0</string>
+    <string name="pathDataBocaTriste">M 30,75 Q 50,55 70,75</string>
+    <string name="pathDataBocaSonriente">M 30,65 Q 50,85 70,65</string>
+    <string name="pathDataOjoIzquierdoAbierto">M 30,65 Q 50,85 70,65</string>
+    <string name="pathDataOjoIzquierdoCerrado">M 30,65 Q 50,85 70,65</string>
+    <string name="pathDataOjoDerechoAbierto">M 30,65 Q 50,85 70,65</string>
+    <string name="pathDataOjoDerechoCerrado">M 30,65 Q 50,85 70,65</string>
 </resources>

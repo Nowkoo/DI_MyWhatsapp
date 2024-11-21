@@ -4,8 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
+import androidx.compose.animation.graphics.res.animatedVectorResource
+import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
+import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -39,6 +45,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -157,14 +164,24 @@ fun CreateTopAppBar(scrollBehaviour: TopAppBarScrollBehavior) {
     )
 }
 
+@OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
 fun CreateFAB() {
+    val image = AnimatedImageVector.animatedVectorResource(R.drawable.avd_tick_cross)
+    var atEnd by rememberSaveable() { mutableStateOf(false)}
+
     FloatingActionButton(
         onClick = {},
         elevation = FloatingActionButtonDefaults.elevation(0.dp),
         containerColor = VerdeWhatsApp,
         contentColor = Color.White
     ) {
-        Icon(Icons.Filled.Add, "Nuevo chat")
+        Image(
+            painter = rememberAnimatedVectorPainter(image, atEnd),
+            contentDescription = "VectorDrawable",
+            modifier = Modifier.clickable {
+                atEnd = !atEnd
+            }
+        )
     }
 }

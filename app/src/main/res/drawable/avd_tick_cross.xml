@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/icn_tick">
+    <target
+        android:name="tick"
+        android:animation="@animator/tick_cross" />
+    <target
+        android:name="grouprotation"
+        android:animation="@animator/rotation" />
+</animated-vector>
