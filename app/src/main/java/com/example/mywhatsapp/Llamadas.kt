@@ -6,6 +6,7 @@ import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
@@ -20,7 +21,11 @@ import androidx.compose.ui.Modifier
 @OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
 fun Llamadas() {
-    Column() {
+    Column(
+        Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
         val image = AnimatedImageVector.animatedVectorResource(R.drawable.avd_smile)
         var atEnd by rememberSaveable() { mutableStateOf(false) }
 
