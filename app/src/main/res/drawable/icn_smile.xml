@@ -11,13 +11,13 @@
         android:strokeWidth="2"
         android:pathData="@string/pathDataCara"/>
     <path
-        android:name="ojoD"
+        android:name="ojod"
         android:fillColor="#000"
         android:strokeLineCap="square"
         android:strokeWidth="2"
         android:pathData="@string/pathDataOjoDerecho"/>
     <path
-        android:name="ojoI"
+        android:name="ojoi"
         android:fillColor="#000"
         android:strokeLineCap="square"
         android:strokeWidth="2"
@@ -28,4 +28,17 @@
         android:strokeLineCap="square"
         android:strokeWidth="2"
         android:pathData="@string/pathDataBocaSonriente"/>
+    <path
+        android:name="right_opened_eye"
+        android:strokeColor="#ffd833"
+        android:fillColor="#ffd833"
+        android:strokeLineCap="round"
+        android:strokeWidth="3" android:pathData="@string/pathDataOjoDerechoAbierto"/>
+    <path
+        android:name="left_opened_eye"
+        android:strokeColor="#ffd833"
+        android:fillColor="#ffd833"
+        android:strokeLineCap="round"
+        android:strokeWidth="3"
+        android:pathData="@string/pathDataOjoIzquierdoAbierto"/>
 </vector>

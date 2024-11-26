@@ -76,7 +76,7 @@ class MainActivity : ComponentActivity() {
                     floatingActionButton = { CreateFAB() }
                 ) { innerPadding ->
                     val modifier = Modifier.padding(innerPadding)
-                    val tabs = listOf("Chats", "Novedades", "Llamadas")
+                    val tabs = listOf("Chats", "Play", "Sonrisa", "Estrella")
                     val pagerState = rememberPagerState(initialPage = 0, pageCount = { tabs.size })
                     val scope = rememberCoroutineScope()
 
@@ -113,6 +113,7 @@ class MainActivity : ComponentActivity() {
                                 0 -> Chats()
                                 1 -> Novedades()
                                 2 -> Llamadas()
+                                3 -> Estrella()
                             }
                         }
                     }

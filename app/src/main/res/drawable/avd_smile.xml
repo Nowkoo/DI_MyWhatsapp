@@ -4,4 +4,10 @@
     <target
         android:name="boca"
         android:animation="@animator/smile_boca" />
+    <target
+        android:name="right_opened_eye"
+        android:animation="@animator/smiley_ojod" />
+    <target
+        android:name="left_opened_eye"
+        android:animation="@animator/smiley_ojoi" />
 </animated-vector>
